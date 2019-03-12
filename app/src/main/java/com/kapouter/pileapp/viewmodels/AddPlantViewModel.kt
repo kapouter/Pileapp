@@ -10,10 +10,14 @@ class AddPlantViewModel : ViewModel() {
 
     fun getPlants(): LiveData<List<Plant>> = plants
 
-    fun loadPlants(query: String = ""): MutableLiveData<List<Plant>> {
+    private fun loadPlants(): MutableLiveData<List<Plant>> {
         val plantList = listOf(Plant("2", "name2", "description2"), Plant("4", "name4", "description4"))
-        plants.value = plantList
         return MutableLiveData(plantList)
+    }
+
+    fun searchPlants(query: String = "") {
+        val plantList = listOf(Plant("2", "name2", "description2"))
+        plants.value = plantList
     }
 
     fun addPlant(plant: Plant) {

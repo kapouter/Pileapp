@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/plantListFragment">
 
+    <fragment
+            android:id="@+id/plantListFragment"
+            android:name="com.kapouter.pileapp.PlantListFragment"
+            tools:layout="@layout/fragment_plant_list"
+            android:label="PlantListFragment">
+        <action
+                android:id="@+id/action_plantListFragment_to_addPlantFragment"
+                app:destination="@id/addPlantFragment"
+                app:enterAnim="@anim/slide_in_top"
+                app:exitAnim="@anim/slide_out_bottom"
+                app:popEnterAnim="@anim/slide_in_bottom"
+                app:popExitAnim="@anim/slide_out_top"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/addPlantFragment"
+            android:name="com.kapouter.pileapp.AddPlantFragment"
+            tools:layout="@layout/fragment_add_plant"
+            android:label="AddPlantFragment"/>
 </navigation>

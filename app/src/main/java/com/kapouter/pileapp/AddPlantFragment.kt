@@ -1,7 +1,5 @@
 package com.kapouter.pileapp
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -18,6 +16,11 @@ import kotlinx.android.synthetic.main.fragment_add_plant.view.*
 class AddPlantFragment : Fragment() {
 
     private lateinit var viewModel: AddPlantViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_add_plant, container, false)
@@ -45,12 +48,12 @@ class AddPlantFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    viewModel.loadPlants(newText ?: "")
+                    viewModel.searchPlants(newText ?: "")
                     return false
                 }
             })
         }
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
-
-
 }
