@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -14,12 +15,16 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "TREFLE_API_URL", '"https://trefle.io/api/"'
+            buildConfigField "String", "TREFLE_TOKEN", '"V2VVMCtJQkREQmdCOUJwNjBxOCtaUT09"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "TREFLE_API_URL", "https://trefle.io/api"
-            buildConfigField "String", "TREFLE_TOKEN", "V2VVMCtJQkREQmdCOUJwNjBxOCtaUT09"
+            buildConfigField "String", "TREFLE_API_URL", '"https://trefle.io/api/"'
+            buildConfigField "String", "TREFLE_TOKEN", '"V2VVMCtJQkREQmdCOUJwNjBxOCtaUT09"'
         }
     }
 }
@@ -35,6 +40,13 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    implementation 'com.google.dagger:dagger:2.21'
+    kapt 'com.google.dagger:dagger-compiler:2.21'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

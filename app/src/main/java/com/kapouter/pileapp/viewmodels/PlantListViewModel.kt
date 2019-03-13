@@ -11,7 +11,7 @@ class PlantListViewModel : ViewModel() {
     fun getPlants(): LiveData<List<Plant>> = plants
 
     private fun loadPlants(): LiveData<List<Plant>> {
-        val plantList = listOf(Plant("1", "name1", "description1"), Plant("2", "name2", "description2"))
+        val plantList = listOf(Plant(1, "name1", "description1", "link"), Plant(2, "name2", "description2", "link"))
         return MutableLiveData(plantList)
     }
 }

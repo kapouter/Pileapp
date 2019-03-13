@@ -1,23 +1,26 @@
 package com.kapouter.pileapp.viewmodels
 
+import androidx.arch.core.util.Function
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Transformations
 import com.kapouter.pileapp.data.Plant
+import com.kapouter.pileapp.data.PlantRepository
+import javax.inject.Inject
 
-class AddPlantViewModel : ViewModel() {
-    private val plants: MutableLiveData<List<Plant>> = loadPlants()
+class AddPlantViewModel : BaseViewModel() {
+
+    @Inject
+    lateinit var repository: PlantRepository
+
+    private val query: MutableLiveData<String> = MutableLiveData("")
+    private val plants: LiveData<List<Plant>> =
+        Transformations.switchMap(query, Function { query -> repository.getPlants(query) })
 
     fun getPlants(): LiveData<List<Plant>> = plants
 
-    private fun loadPlants(): MutableLiveData<List<Plant>> {
-        val plantList = listOf(Plant("2", "name2", "description2"), Plant("4", "name4", "description4"))
-        return MutableLiveData(plantList)
-    }
-
-    fun searchPlants(query: String = "") {
-        val plantList = listOf(Plant("2", "name2", "description2"))
-        plants.value = plantList
+    fun searchPlants(q: String = "") {
+        query.postValue(q)
     }
 
     fun addPlant(plant: Plant) {

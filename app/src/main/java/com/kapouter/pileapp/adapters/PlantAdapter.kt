@@ -31,7 +31,7 @@ class PlantAdapter(private val onAddListener: OnAddItemListener? = null) :
         fun bind(item: Plant, onAddListener: OnAddItemListener?) {
             v.apply {
                 plantName.text = item.name
-                plantDescription.text = item.description
+                plantDescription.text = item.scientificName
                 if (onAddListener != null) {
                     addPlant.visibility = VISIBLE
                     addPlant.setOnClickListener { onAddListener.onAddItem(item) }
