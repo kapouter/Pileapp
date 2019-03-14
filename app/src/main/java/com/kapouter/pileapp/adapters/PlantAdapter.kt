@@ -5,19 +5,19 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kapouter.pileapp.R
 import com.kapouter.pileapp.data.Plant
 import kotlinx.android.synthetic.main.item_plant.view.*
 
 interface OnAddItemListener {
-    fun onAddItem(item: Plant)
+    fun onAddItem(item: Plant?)
 }
 
 class PlantAdapter(private val onAddListener: OnAddItemListener? = null) :
-    ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
+    PagedListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_plant, parent, false))
@@ -28,10 +28,10 @@ class PlantAdapter(private val onAddListener: OnAddItemListener? = null) :
     }
 
     class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
-        fun bind(item: Plant, onAddListener: OnAddItemListener?) {
+        fun bind(item: Plant?, onAddListener: OnAddItemListener?) {
             v.apply {
-                plantName.text = item.name
-                plantDescription.text = item.scientificName
+                plantName.text = item?.name
+                plantDescription.text = item?.scientificName
                 if (onAddListener != null) {
                     addPlant.visibility = VISIBLE
                     addPlant.setOnClickListener { onAddListener.onAddItem(item) }

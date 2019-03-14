@@ -7,20 +7,20 @@ buildscript {
         lifecycleVersion = '2.1.0-alpha02'
         materialVersion = '1.0.0'
         navigationVersion = '2.0.0-rc02'
+        pagingVersion = '2.1.0'
         recyclerViewVersion = '1.1.0-alpha02'
+        roomVersion = '2.1.0-alpha04'
         supportLibraryVersion = '1.1.0-alpha02'
     }
 
     repositories {
         google()
         jcenter()
-
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        //classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.0.0-rc02"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     }
 }
 

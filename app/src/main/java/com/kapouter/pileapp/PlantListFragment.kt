@@ -25,7 +25,8 @@ class PlantListFragment : Fragment() {
         view.plants.adapter = adapter
         view.plants.layoutManager = LinearLayoutManager(context)
         viewModel.getPlants().observe(this, Observer { plants ->
-            if (plants != null) adapter.submitList(plants)
+            // TODO implement list for saved data
+            //if (plants != null) adapter.submitList( plants)
         })
 
         view.fab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_plantListFragment_to_addPlantFragment))

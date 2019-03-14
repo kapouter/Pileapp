@@ -1,25 +1,28 @@
 package com.kapouter.pileapp.data
 
-import androidx.lifecycle.MutableLiveData
+import android.content.Context
+import androidx.paging.LivePagedListBuilder
+import com.kapouter.pileapp.db.AppDatabase
 import com.kapouter.pileapp.services.TrefleService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.kapouter.pileapp.utils.PLANT_PAGE_SIZE
+import java.util.concurrent.Executor
 
 
-class PlantRepository(private val trefleService: TrefleService) {
+class PlantRepository(
+    private val context: Context,
+    private val trefleService: TrefleService,
+    private val executor: Executor
+) {
 
-    fun getPlants(query: String): MutableLiveData<List<Plant>> {
-        val data = MutableLiveData<List<Plant>>()
-        trefleService.getPlants(query = query).enqueue(object : Callback<List<Plant>> {
+    fun getPlants(query: String): PlantsResult {
+        val dataSource = AppDatabase.getInstance(context).plantDao()
+        val dataSourceFactory = if (query.isNotEmpty()) dataSource.searchPlants(query) else dataSource.getPlants()
+        val boundaryCallback = PlantBoundaryCallback(query, trefleService, dataSource, executor)
+        val error = boundaryCallback.error
+        val data = LivePagedListBuilder(dataSourceFactory, PLANT_PAGE_SIZE)
+            .setBoundaryCallback(boundaryCallback)
+            .build()
 
-            override fun onResponse(call: Call<List<Plant>>, response: Response<List<Plant>>) {
-                data.value = response.body()
-            }
-
-            override fun onFailure(call: Call<List<Plant>>, t: Throwable) {
-            }
-        })
-        return data
+        return PlantsResult(data, error)
     }
 }

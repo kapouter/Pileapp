@@ -1,11 +1,14 @@
 package com.kapouter.pileapp.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "plants")
 data class Plant(
-    @SerializedName("id") val id: Int,
-    @SerializedName("common_name") val name: String,
+    @PrimaryKey @SerializedName("id") val id: Int,
+    @SerializedName("common_name") val name: String?,
     @SerializedName("scientific_name") val scientificName: String,
-    @SerializedName("link") val link: String
+    @SerializedName("link") val link: String?
 ) {
 }
