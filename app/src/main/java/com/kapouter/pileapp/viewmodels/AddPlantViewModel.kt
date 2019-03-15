@@ -1,14 +1,13 @@
 package com.kapouter.pileapp.viewmodels
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
-import com.kapouter.pileapp.data.Plant
 import com.kapouter.pileapp.data.PlantRepository
-import com.kapouter.pileapp.data.PlantsResult
+import com.kapouter.pileapp.model.Plant
+import com.kapouter.pileapp.model.PlantsResult
 import javax.inject.Inject
 
 class AddPlantViewModel(context: Context) : BaseViewModel(context) {
@@ -30,6 +29,5 @@ class AddPlantViewModel(context: Context) : BaseViewModel(context) {
 
     fun addPlant(plant: Plant) {
         //TODO: implement add plant query
-        Log.d("azerty", "Implement add plant query")
     }
 }

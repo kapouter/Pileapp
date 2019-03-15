@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.kapouter.pileapp.db.PlantDao
+import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.services.TrefleService
 import retrofit2.Call
 import retrofit2.Callback

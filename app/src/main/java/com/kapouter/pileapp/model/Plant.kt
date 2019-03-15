@@ -1,4 +1,4 @@
-package com.kapouter.pileapp.data
+package com.kapouter.pileapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

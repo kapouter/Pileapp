@@ -3,6 +3,7 @@ package com.kapouter.pileapp.data
 import android.content.Context
 import androidx.paging.LivePagedListBuilder
 import com.kapouter.pileapp.db.AppDatabase
+import com.kapouter.pileapp.model.PlantsResult
 import com.kapouter.pileapp.services.TrefleService
 import com.kapouter.pileapp.utils.PLANT_PAGE_SIZE
 import java.util.concurrent.Executor

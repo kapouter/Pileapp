@@ -1,8 +1,7 @@
 package com.kapouter.pileapp.services
 
-import android.provider.SyncStateContract
 import com.kapouter.pileapp.BuildConfig
-import com.kapouter.pileapp.data.Plant
+import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.utils.PLANT_PAGE_SIZE
 import retrofit2.Call
 import retrofit2.http.GET

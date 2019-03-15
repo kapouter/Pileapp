@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kapouter.pileapp.adapters.OnAddItemListener
 import com.kapouter.pileapp.adapters.PlantAdapter
-import com.kapouter.pileapp.data.Plant
+import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.viewmodels.AddPlantViewModel
 import com.kapouter.pileapp.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_add_plant.view.*

@@ -9,7 +9,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kapouter.pileapp.R
-import com.kapouter.pileapp.data.Plant
+import com.kapouter.pileapp.model.Plant
 import kotlinx.android.synthetic.main.item_plant.view.*
 
 interface OnAddItemListener {

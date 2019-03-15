@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.kapouter.pileapp.data.Plant
+import com.kapouter.pileapp.model.Plant
 
 @Dao
 interface PlantDao {
