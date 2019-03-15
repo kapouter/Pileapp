@@ -56,5 +56,6 @@ class ServiceModule(val context: Context) {
         PlantRepository(context, trefleService, executor)
 
     @Provides
-    fun getGroveRepository(executor: Executor): GroveRepository = GroveRepository(context, executor)
+    fun getGroveRepository(trefleService: TrefleService, executor: Executor): GroveRepository =
+        GroveRepository(context, trefleService, executor)
 }

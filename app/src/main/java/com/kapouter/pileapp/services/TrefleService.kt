@@ -1,5 +1,6 @@
 package com.kapouter.pileapp.services
 
+import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.utils.PLANT_PAGE_SIZE
 import retrofit2.Call
@@ -18,5 +19,5 @@ interface TrefleService {
 
 
     @GET("plants/{id}")
-    fun getPlant(@Path("id") id: Int): Call<Plant>
+    fun getPlant(@Path("id") id: Int): Call<GrovePlant>
 }

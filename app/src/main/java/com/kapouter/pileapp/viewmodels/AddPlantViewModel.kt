@@ -35,7 +35,7 @@ class AddPlantViewModel(context: Context) : BaseViewModel(context) {
         query.postValue(q)
     }
 
-    fun addPlant(plant: Plant) {
-        groveRepository.addPlant(GrovePlant(plant.id, plant.name, plant.scientificName, plant.link))
+    fun addPlant(plantId: Int) {
+        groveRepository.addPlant(plantId)
     }
 }

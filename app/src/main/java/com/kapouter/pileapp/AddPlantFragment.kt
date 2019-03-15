@@ -31,7 +31,7 @@ class AddPlantFragment : Fragment() {
             .get(AddPlantViewModel::class.java)
         val adapter = PlantAdapter(object : OnAddItemListener {
             override fun onAddItem(item: Plant?) {
-                if (item != null) viewModel.addPlant(item)
+                if (item != null) viewModel.addPlant(item.id)
             }
         })
         view.plants.adapter = adapter
