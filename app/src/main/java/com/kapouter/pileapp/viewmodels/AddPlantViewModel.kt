@@ -20,8 +20,11 @@ class AddPlantViewModel(context: Context) : BaseViewModel(context) {
         Transformations.map(query) { repository.getPlants(it) }
     private val plants: LiveData<PagedList<Plant>> =
         Transformations.switchMap(plantsResult) { it.data }
+    private val error: LiveData<String> =
+        Transformations.switchMap(plantsResult) { it.error }
 
     fun getPlants(): LiveData<PagedList<Plant>> = plants
+    fun getError(): LiveData<String> = error
 
     fun searchPlants(q: String = "") {
         query.postValue(q)

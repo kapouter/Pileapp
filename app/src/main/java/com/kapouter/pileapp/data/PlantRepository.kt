@@ -17,7 +17,7 @@ class PlantRepository(
 
     fun getPlants(query: String): PlantsResult {
         val dataSource = AppDatabase.getInstance(context).plantDao()
-        val dataSourceFactory = if (query.isNotEmpty()) dataSource.searchPlants(query) else dataSource.getPlants()
+        val dataSourceFactory = dataSource.searchPlants(query)
         val boundaryCallback = PlantBoundaryCallback(query, trefleService, dataSource, executor)
         val error = boundaryCallback.error
         val data = LivePagedListBuilder(dataSourceFactory, PLANT_PAGE_SIZE)

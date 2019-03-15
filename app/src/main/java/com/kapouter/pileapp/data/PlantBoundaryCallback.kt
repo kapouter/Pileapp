@@ -39,9 +39,13 @@ class PlantBoundaryCallback(
         trefleService.getPlants(query = query, pageNumber = nextPage).enqueue(object : Callback<List<Plant>> {
 
             override fun onResponse(call: Call<List<Plant>>, response: Response<List<Plant>>) {
-                nextPage++
-                if (response.body() != null) executor.execute {
-                    plantDao.insert(response.body()!!)
+                if (response.isSuccessful) {
+                    nextPage++
+                    if (response.body() != null) executor.execute {
+                        plantDao.insert(response.body()!!)
+                    }
+                } else {
+                    _error.postValue(response.errorBody()?.string() ?: "error")
                 }
                 loading = false
             }

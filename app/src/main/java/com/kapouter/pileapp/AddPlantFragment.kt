@@ -2,6 +2,7 @@ package com.kapouter.pileapp
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -36,6 +37,10 @@ class AddPlantFragment : Fragment() {
         view.plants.adapter = adapter
         view.plants.layoutManager = LinearLayoutManager(context)
         viewModel.getPlants().observe(this, Observer { plants -> if (plants != null) adapter.submitList(plants) })
+        viewModel.getError()
+            .observe(this, Observer {
+                if (it.isNotEmpty()) Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
 
         return view
     }
