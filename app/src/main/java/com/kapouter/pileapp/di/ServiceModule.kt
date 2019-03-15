@@ -2,6 +2,7 @@ package com.kapouter.pileapp.di
 
 import android.content.Context
 import com.kapouter.pileapp.BuildConfig
+import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.data.PlantRepository
 import com.kapouter.pileapp.services.TrefleService
 import dagger.Module
@@ -53,4 +54,7 @@ class ServiceModule(val context: Context) {
     @Provides
     fun getPlantRepository(trefleService: TrefleService, executor: Executor): PlantRepository =
         PlantRepository(context, trefleService, executor)
+
+    @Provides
+    fun getGroveRepository(executor: Executor): GroveRepository = GroveRepository(context, executor)
 }

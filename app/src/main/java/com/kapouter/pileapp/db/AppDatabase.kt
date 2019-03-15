@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.model.Plant
 
-@Database(entities = [Plant::class], version = 1)
+@Database(entities = [Plant::class, GrovePlant::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun plantDao(): PlantDao
+    abstract fun groveDao(): GroveDao
 
     companion object {
         @Volatile

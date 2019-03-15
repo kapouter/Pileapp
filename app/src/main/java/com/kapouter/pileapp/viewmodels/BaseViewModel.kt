@@ -19,6 +19,7 @@ abstract class BaseViewModel(context: Context) : ViewModel() {
     private fun inject() {
         when (this) {
             is AddPlantViewModel -> injector.inject(this)
+            is GroveViewModel -> injector.inject(this)
         }
     }
 }

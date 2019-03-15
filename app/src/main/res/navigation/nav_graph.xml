@@ -7,8 +7,8 @@
 
     <fragment
             android:id="@+id/plantListFragment"
-            android:name="com.kapouter.pileapp.PlantListFragment"
-            tools:layout="@layout/fragment_plant_list"
+            android:name="com.kapouter.pileapp.GroveFragment"
+            tools:layout="@layout/fragment_grove"
             android:label="PlantListFragment">
         <action
                 android:id="@+id/action_plantListFragment_to_addPlantFragment"

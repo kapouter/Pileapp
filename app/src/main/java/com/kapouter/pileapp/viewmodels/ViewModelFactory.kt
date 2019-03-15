@@ -9,6 +9,9 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
         if (modelClass.isAssignableFrom(AddPlantViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return AddPlantViewModel(context) as T
+        } else if (modelClass.isAssignableFrom(GroveViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return GroveViewModel(context) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

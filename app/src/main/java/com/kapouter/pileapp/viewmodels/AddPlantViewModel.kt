@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
+import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.data.PlantRepository
+import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.model.PlantsResult
 import javax.inject.Inject
@@ -14,6 +16,9 @@ class AddPlantViewModel(context: Context) : BaseViewModel(context) {
 
     @Inject
     lateinit var repository: PlantRepository
+
+    @Inject
+    lateinit var groveRepository: GroveRepository
 
     private val query: MutableLiveData<String> = MutableLiveData("")
     private val plantsResult: LiveData<PlantsResult> =
@@ -31,6 +36,6 @@ class AddPlantViewModel(context: Context) : BaseViewModel(context) {
     }
 
     fun addPlant(plant: Plant) {
-        //TODO: implement add plant query
+        groveRepository.addPlant(GrovePlant(plant.id, plant.name, plant.scientificName, plant.link))
     }
 }
