@@ -7,7 +7,6 @@ import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
 import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.data.PlantRepository
-import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.model.PlantsResult
 import javax.inject.Inject
