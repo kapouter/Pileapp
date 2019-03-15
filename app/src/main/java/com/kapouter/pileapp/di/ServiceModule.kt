@@ -28,6 +28,12 @@ class ServiceModule(val context: Context) {
     fun getOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor {
+                val newRequest = it.request().newBuilder()
+                    .addHeader("Authorization", "Bearer ".plus(BuildConfig.TREFLE_TOKEN))
+                    .build()
+                it.proceed(newRequest)
+            }
             .build()
     }
 
@@ -45,5 +51,6 @@ class ServiceModule(val context: Context) {
     fun getExecutor(): Executor = Executors.newSingleThreadExecutor()
 
     @Provides
-    fun getPlantRepository(trefleService: TrefleService, executor: Executor): PlantRepository = PlantRepository(context, trefleService, executor)
+    fun getPlantRepository(trefleService: TrefleService, executor: Executor): PlantRepository =
+        PlantRepository(context, trefleService, executor)
 }

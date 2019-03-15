@@ -1,6 +1,5 @@
 package com.kapouter.pileapp.services
 
-import com.kapouter.pileapp.BuildConfig
 import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.utils.PLANT_PAGE_SIZE
 import retrofit2.Call
@@ -12,7 +11,6 @@ interface TrefleService {
 
     @GET("plants")
     fun getPlants(
-        @Query("token") token: String = BuildConfig.TREFLE_TOKEN,
         @Query("q") query: String,
         @Query("page") pageNumber: Int = 1,
         @Query("page_size") pageSize: Int = PLANT_PAGE_SIZE
@@ -20,5 +18,5 @@ interface TrefleService {
 
 
     @GET("plants/{id}")
-    fun getPlant(@Query("token") token: String = BuildConfig.TREFLE_TOKEN, @Path("id") id: Int): Call<Plant>
+    fun getPlant(@Path("id") id: Int): Call<Plant>
 }
