@@ -9,5 +9,6 @@ data class Plant(
     @PrimaryKey @SerializedName("id") val id: Int,
     @SerializedName("common_name") val name: String?,
     @SerializedName("scientific_name") val scientificName: String,
-    @SerializedName("link") val link: String?
+    @SerializedName("link") val link: String?,
+    val isGrovePlant: Int = 0
 )

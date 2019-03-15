@@ -12,4 +12,13 @@ interface PlantDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(plants: List<Plant>)
+
+    @Query("UPDATE plants SET isGrovePlant = 1 WHERE id IN (SELECT id from plants INTERSECT SELECT id from grovePlants)")
+    fun applyIsInGrove()
+
+    @Query("UPDATE plants SET isGrovePlant = 1 WHERE id LIKE :plantId")
+    fun applyIsInGrove(plantId: Int)
+
+    @Query("SELECT * FROM plants WHERE id IN (SELECT id from plants INTERSECT SELECT id from grovePlants)")
+    fun getIntersect(): List<Plant>
 }

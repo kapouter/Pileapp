@@ -1,5 +1,6 @@
 package com.kapouter.pileapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -16,7 +17,7 @@ interface OnAddItemListener {
     fun onAddItem(item: Plant?)
 }
 
-class PlantAdapter(private val onAddListener: OnAddItemListener? = null) :
+class PlantAdapter(private val onAddListener: OnAddItemListener) :
     PagedListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -28,11 +29,11 @@ class PlantAdapter(private val onAddListener: OnAddItemListener? = null) :
     }
 
     class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
-        fun bind(item: Plant?, onAddListener: OnAddItemListener?) {
+        fun bind(item: Plant?, onAddListener: OnAddItemListener) {
             v.apply {
                 plantName.text = item?.name
                 plantDescription.text = item?.scientificName
-                if (onAddListener != null) {
+                if (item?.isGrovePlant == 0) {
                     addPlant.visibility = VISIBLE
                     addPlant.setOnClickListener { onAddListener.onAddItem(item) }
                 } else

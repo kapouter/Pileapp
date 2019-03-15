@@ -43,6 +43,7 @@ class PlantBoundaryCallback(
                     nextPage++
                     if (response.body() != null) executor.execute {
                         plantDao.insert(response.body()!!)
+                        plantDao.applyIsInGrove()
                     }
                 } else {
                     _error.postValue(response.errorBody()?.string() ?: "error")

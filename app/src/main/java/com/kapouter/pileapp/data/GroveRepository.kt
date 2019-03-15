@@ -28,6 +28,7 @@ class GroveRepository(
 
     fun addPlant(plantId: Int) {
         val dataSource = AppDatabase.getInstance(context).groveDao()
+        val plantDataSource = AppDatabase.getInstance(context).plantDao()
         trefleService.getPlant(plantId).enqueue(object : Callback<GrovePlant> {
 
             override fun onFailure(call: Call<GrovePlant>, t: Throwable) {
@@ -35,9 +36,11 @@ class GroveRepository(
 
             override fun onResponse(call: Call<GrovePlant>, response: Response<GrovePlant>) {
                 if (response.isSuccessful) {
-                    if (response.body() != null)
+                    val plant = response.body()
+                    if (plant != null)
                         executor.execute {
-                            dataSource.insert(response.body() as GrovePlant)
+                            dataSource.insert(plant)
+                            plantDataSource.applyIsInGrove(plant.id)
                         }
                 }
             }
