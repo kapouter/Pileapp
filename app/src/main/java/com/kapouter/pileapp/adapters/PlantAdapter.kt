@@ -2,9 +2,9 @@ package com.kapouter.pileapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.widget.ImageViewCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -30,13 +30,22 @@ class PlantAdapter(private val onAddListener: OnAddItemListener) :
     class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
         fun bind(item: Plant?, onAddListener: OnAddItemListener) {
             v.apply {
-                plantName.text = item?.name
-                plantDescription.text = item?.scientificName
+                name.text = item?.name ?: item?.scientificName
+                scientificName.text = item?.scientificName
                 if (item?.isGrovePlant == 0) {
-                    addPlant.visibility = VISIBLE
+                    addPlant.setImageResource(R.drawable.ic_add)
+                    ImageViewCompat.setImageTintList(
+                        addPlant,
+                        AppCompatResources.getColorStateList(v.context, R.color.black)
+                    )
                     addPlant.setOnClickListener { onAddListener.onAddItem(item) }
-                } else
-                    addPlant.visibility = GONE
+                } else {
+                    addPlant.setImageResource(R.drawable.ic_check)
+                    ImageViewCompat.setImageTintList(
+                        addPlant,
+                        AppCompatResources.getColorStateList(v.context, R.color.green)
+                    )
+                }
             }
         }
     }

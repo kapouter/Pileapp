@@ -3,10 +3,12 @@ package com.kapouter.pileapp
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kapouter.pileapp.adapters.OnAddItemListener
 import com.kapouter.pileapp.adapters.PlantAdapter
@@ -35,7 +37,14 @@ class AddPlantFragment : Fragment() {
             }
         })
         view.plants.adapter = adapter
-        view.plants.layoutManager = LinearLayoutManager(context)
+
+        val layoutManager = LinearLayoutManager(context)
+        view.plants.layoutManager = layoutManager
+        val divider = DividerItemDecoration(context, layoutManager.orientation)
+        val dividerRes = context?.let { AppCompatResources.getDrawable(it, R.drawable.divider) }
+        dividerRes?.let { divider.setDrawable(it) }
+        view.plants.addItemDecoration(divider)
+
         viewModel.getPlants().observe(this, Observer { plants -> if (plants != null) adapter.submitList(plants) })
         viewModel.getError()
             .observe(this, Observer {
