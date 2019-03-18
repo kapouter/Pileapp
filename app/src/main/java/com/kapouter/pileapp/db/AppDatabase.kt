@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.model.Plant
+import com.kapouter.pileapp.model.PlantConverters
 
 @Database(entities = [Plant::class, GrovePlant::class], version = 1)
+@TypeConverters(value = [PlantConverters::class])
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun plantDao(): PlantDao
