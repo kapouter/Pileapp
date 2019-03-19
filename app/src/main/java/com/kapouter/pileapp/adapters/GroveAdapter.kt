@@ -3,13 +3,15 @@ package com.kapouter.pileapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kapouter.pileapp.GroveFragmentDirections
 import com.kapouter.pileapp.R
 import com.kapouter.pileapp.model.GrovePlant
-import com.kapouter.pileapp.model.Image
+import com.kapouter.pileapp.model.findFirstNonSvgUrl
 import kotlinx.android.synthetic.main.item_grove.view.*
 
 class GroveAdapter :
@@ -30,17 +32,18 @@ class GroveAdapter :
                 scientificName.text = item?.scientificName
 
                 Glide.with(v)
-                    .load(findFirstNonSvgUrl(item?.images))
+                    .load(item?.images?.findFirstNonSvgUrl())
                     .centerCrop()
                     .placeholder(R.drawable.ic_flower)
                     .into(image)
 
+                v.setOnClickListener {
+                    if (item?.id != null)
+                        v.findNavController().navigate(
+                            GroveFragmentDirections.actionPlantListFragmentToPlantDetailFragment(item.id)
+                        )
+                }
             }
-        }
-
-        private fun findFirstNonSvgUrl(images: List<Image>?): String? {
-            if (images == null || images.isEmpty()) return null
-            return images.find { !it.url.contains("svg", true) }?.url ?: images[0].url
         }
     }
 }

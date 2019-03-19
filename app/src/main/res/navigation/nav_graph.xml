@@ -17,6 +17,13 @@
                 app:exitAnim="@anim/slide_out_bottom"
                 app:popEnterAnim="@anim/slide_in_bottom"
                 app:popExitAnim="@anim/slide_out_top"/>
+        <action
+                android:id="@+id/action_plantListFragment_to_plantDetailFragment"
+                app:destination="@id/plantDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
 
     <fragment
@@ -24,4 +31,13 @@
             android:name="com.kapouter.pileapp.AddPlantFragment"
             tools:layout="@layout/fragment_add_plant"
             android:label="AddPlantFragment"/>
+    <fragment
+            android:id="@+id/plantDetailFragment"
+            android:name="com.kapouter.pileapp.PlantDetailFragment"
+            tools:layout="@layout/fragment_plant_detail"
+            android:label="PlantDetailFragment">
+        <argument
+                android:name="plantId"
+                app:argType="integer"/>
+    </fragment>
 </navigation>

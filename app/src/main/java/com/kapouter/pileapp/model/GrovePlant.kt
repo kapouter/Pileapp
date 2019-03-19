@@ -19,6 +19,11 @@ data class GrovePlant(
 
 data class Image(val url: String)
 
+fun List<Image>?.findFirstNonSvgUrl(): String? {
+    if (this == null || this.isEmpty()) return null
+    return this.find { !it.url.contains("svg", true) }?.url ?: this[0].url
+}
+
 data class MainSpecies(
     @Embedded(prefix = "specifications_") @SerializedName("specifications") val specifications: MainSpeciesSpecifications?,
     @Embedded(prefix = "seed_") @SerializedName("seed") val seed: Seed?,

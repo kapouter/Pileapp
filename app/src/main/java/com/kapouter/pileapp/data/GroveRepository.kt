@@ -2,6 +2,7 @@ package com.kapouter.pileapp.data
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.kapouter.pileapp.db.AppDatabase
@@ -24,6 +25,33 @@ class GroveRepository(
         val dataSourceFactory = dataSource.getPlants()
         return LivePagedListBuilder(dataSourceFactory, PLANT_PAGE_SIZE)
             .build()
+    }
+
+    fun getPlant(plantId: Int): LiveData<GrovePlant> {
+        val dataSource = AppDatabase.getInstance(context).groveDao()
+        val data = MutableLiveData<GrovePlant>()
+        executor.execute {
+            data.postValue(dataSource.getPlant(plantId))
+        }
+
+        trefleService.getPlant(plantId).enqueue(object : Callback<GrovePlant> {
+            override fun onFailure(call: Call<GrovePlant>, t: Throwable) {
+            }
+
+            override fun onResponse(call: Call<GrovePlant>, response: Response<GrovePlant>) {
+                if (response.isSuccessful) {
+                    val plant = response.body()
+                    if (plant != null) {
+                        data.postValue(plant)
+                        executor.execute {
+                            dataSource.update(plant)
+                        }
+                    }
+                }
+            }
+        })
+
+        return data
     }
 
     fun addPlant(plantId: Int) {
