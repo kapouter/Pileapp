@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionManager
 import com.kapouter.pileapp.adapters.GroveAdapter
 import com.kapouter.pileapp.viewmodels.GroveViewModel
 import com.kapouter.pileapp.viewmodels.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_grove.*
 import kotlinx.android.synthetic.main.fragment_grove.view.*
 
 class GroveFragment : Fragment() {
@@ -41,5 +44,17 @@ class GroveFragment : Fragment() {
         view.fab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_plantListFragment_to_addPlantFragment))
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.postDelayed({ animateToKeyframeTwo() }, 500)
+    }
+
+    private fun animateToKeyframeTwo() {
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(context, R.layout.fragment_grove2)
+        TransitionManager.beginDelayedTransition(constraintLayout)
+        constraintSet.applyTo(constraintLayout)
     }
 }
