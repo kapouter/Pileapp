@@ -1,16 +1,13 @@
 package com.kapouter.pileapp.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.model.GrovePlant
 import javax.inject.Inject
 
-class GroveViewModel(val context: Context) : BaseViewModel(context) {
-
-    @Inject
-    lateinit var repository: GroveRepository
+class GroveViewModel @Inject constructor(private val repository: GroveRepository) : ViewModel() {
 
     private val plants: LiveData<PagedList<GrovePlant>> = repository.getPlants()
 

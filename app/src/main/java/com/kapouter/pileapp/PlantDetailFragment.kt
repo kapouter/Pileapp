@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.model.findFirstNonSvgUrl
 import com.kapouter.pileapp.viewmodels.PlantDetailViewModel
-import com.kapouter.pileapp.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
 
 class PlantDetailFragment : Fragment() {
@@ -22,11 +21,13 @@ class PlantDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(activity!!.applicationContext, args.plantId))
+        val viewModelFactory = (activity as BaseActivity).viewModelFactory
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(PlantDetailViewModel::class.java)
         viewModel.getPlant().observe(this, Observer {
             if (it != null) updateView(it)
         })
+        viewModel.loadPlant(args.plantId)
 
         return inflater.inflate(R.layout.fragment_plant_detail, container, false)
     }

@@ -18,7 +18,4 @@ interface PlantDao {
 
     @Query("UPDATE plants SET isGrovePlant = 1 WHERE id LIKE :plantId")
     fun applyIsInGrove(plantId: Int)
-
-    @Query("SELECT * FROM plants WHERE id IN (SELECT id from plants INTERSECT SELECT id from grovePlants)")
-    fun getIntersect(): List<Plant>
 }

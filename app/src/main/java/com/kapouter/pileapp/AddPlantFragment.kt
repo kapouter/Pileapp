@@ -14,7 +14,6 @@ import com.kapouter.pileapp.adapters.OnAddItemListener
 import com.kapouter.pileapp.adapters.PlantAdapter
 import com.kapouter.pileapp.model.Plant
 import com.kapouter.pileapp.viewmodels.AddPlantViewModel
-import com.kapouter.pileapp.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_add_plant.view.*
 
 class AddPlantFragment : Fragment() {
@@ -29,7 +28,8 @@ class AddPlantFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_add_plant, container, false)
 
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(activity!!.applicationContext))
+        val viewModelFactory = (activity as BaseActivity).viewModelFactory
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(AddPlantViewModel::class.java)
         val adapter = PlantAdapter(object : OnAddItemListener {
             override fun onAddItem(item: Plant?) {

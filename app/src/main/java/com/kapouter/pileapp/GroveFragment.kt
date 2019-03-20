@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
 import com.kapouter.pileapp.adapters.GroveAdapter
 import com.kapouter.pileapp.viewmodels.GroveViewModel
-import com.kapouter.pileapp.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_grove.*
 import kotlinx.android.synthetic.main.fragment_grove.view.*
 
@@ -26,8 +25,9 @@ class GroveFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_grove, container, false)
 
+        val viewModelFactory = (activity as BaseActivity).viewModelFactory
         viewModel =
-            ViewModelProviders.of(this, ViewModelFactory(activity!!.applicationContext)).get(GroveViewModel::class.java)
+            ViewModelProviders.of(this, viewModelFactory).get(GroveViewModel::class.java)
 
         val adapter = GroveAdapter()
         view.plants.adapter = adapter
