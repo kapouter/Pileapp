@@ -1,11 +1,11 @@
 package com.kapouter.pileapp.data
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.kapouter.pileapp.db.AppDatabase
+import com.kapouter.pileapp.db.GroveDao
+import com.kapouter.pileapp.db.PlantDao
 import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.services.TrefleService
 import com.kapouter.pileapp.utils.PLANT_PAGE_SIZE
@@ -15,23 +15,22 @@ import retrofit2.Response
 import java.util.concurrent.Executor
 
 class GroveRepository(
-    private val context: Context,
+    private val groveDao: GroveDao,
+    private val plantDao: PlantDao,
     private val trefleService: TrefleService,
     private val executor: Executor
 ) {
 
     fun getPlants(): LiveData<PagedList<GrovePlant>> {
-        val dataSource = AppDatabase.getInstance(context).groveDao()
-        val dataSourceFactory = dataSource.getPlants()
+        val dataSourceFactory = groveDao.getPlants()
         return LivePagedListBuilder(dataSourceFactory, PLANT_PAGE_SIZE)
             .build()
     }
 
     fun getPlant(plantId: Int): LiveData<GrovePlant> {
-        val dataSource = AppDatabase.getInstance(context).groveDao()
         val data = MutableLiveData<GrovePlant>()
         executor.execute {
-            data.postValue(dataSource.getPlant(plantId))
+            data.postValue(groveDao.getPlant(plantId))
         }
 
         trefleService.getPlant(plantId).enqueue(object : Callback<GrovePlant> {
@@ -44,7 +43,7 @@ class GroveRepository(
                     if (plant != null) {
                         data.postValue(plant)
                         executor.execute {
-                            dataSource.update(plant)
+                            groveDao.update(plant)
                         }
                     }
                 }
@@ -55,8 +54,6 @@ class GroveRepository(
     }
 
     fun addPlant(plantId: Int) {
-        val dataSource = AppDatabase.getInstance(context).groveDao()
-        val plantDataSource = AppDatabase.getInstance(context).plantDao()
         trefleService.getPlant(plantId).enqueue(object : Callback<GrovePlant> {
 
             override fun onFailure(call: Call<GrovePlant>, t: Throwable) {
@@ -67,8 +64,8 @@ class GroveRepository(
                     val plant = response.body()
                     if (plant != null)
                         executor.execute {
-                            dataSource.insert(plant)
-                            plantDataSource.applyIsInGrove(plant.id)
+                            groveDao.insert(plant)
+                            plantDao.applyIsInGrove(plant.id)
                         }
                 }
             }

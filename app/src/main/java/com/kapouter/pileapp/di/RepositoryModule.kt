@@ -3,6 +3,7 @@ package com.kapouter.pileapp.di
 import android.content.Context
 import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.data.PlantRepository
+import com.kapouter.pileapp.db.AppDatabase
 import com.kapouter.pileapp.services.TrefleService
 import dagger.Module
 import dagger.Provides
@@ -17,9 +18,14 @@ class RepositoryModule(val context: Context) {
 
     @Provides
     fun getPlantRepository(trefleService: TrefleService, executor: Executor): PlantRepository =
-        PlantRepository(context, trefleService, executor)
+        PlantRepository(AppDatabase.getInstance(context).plantDao(), trefleService, executor)
 
     @Provides
     fun getGroveRepository(trefleService: TrefleService, executor: Executor): GroveRepository =
-        GroveRepository(context, trefleService, executor)
+        GroveRepository(
+            AppDatabase.getInstance(context).groveDao(),
+            AppDatabase.getInstance(context).plantDao(),
+            trefleService,
+            executor
+        )
 }

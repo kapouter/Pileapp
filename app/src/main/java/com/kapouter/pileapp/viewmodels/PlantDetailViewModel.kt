@@ -8,7 +8,7 @@ import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.model.GrovePlant
 import javax.inject.Inject
 
-class PlantDetailViewModel @Inject constructor(private val repository: GroveRepository/*, plantId: Int*/) :
+class PlantDetailViewModel @Inject constructor(private val repository: GroveRepository) :
     ViewModel() {
 
     private val plantId = MutableLiveData<Int>()
