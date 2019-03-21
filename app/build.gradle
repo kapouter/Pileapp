@@ -12,7 +12,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
@@ -25,6 +25,12 @@ android {
 
             buildConfigField "String", "TREFLE_API_URL", '"https://trefle.io/api/"'
             buildConfigField "String", "TREFLE_TOKEN", '"V2VVMCtJQkREQmdCOUJwNjBxOCtaUT09"'
+        }
+    }
+    useLibrary 'android.test.runner'
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 }
@@ -54,7 +60,25 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
+    // Testing dependencies
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
+    //testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //androidTestImplementation "androidx.test:core:$coreVersion"
+    //androidTestImplementation "androidx.test:core-ktx:$coreVersion"
+    androidTestImplementation "androidx.test:runner:$runnerVersion"
+    //androidTestImplementation 'androidx.test:rules:1.1.1'
+
+    //androidTestImplementation "androidx.test.ext:junit:$extJUnitVersion"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$extJUnitVersion"
+    //testImplementation 'androidx.test.ext:truth:1.1.0'
+    //testImplementation 'com.google.truth:truth:0.42'
+
+    testImplementation 'org.robolectric:robolectric:4.2'
+    //androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    //androidTestImplementation "androidx.room:room-testing:$roomVersion"
 }
