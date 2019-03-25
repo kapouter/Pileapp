@@ -21,6 +21,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+// Using https://medium.com/@marco_cattaneo/unit-testing-with-mockito-on-kotlin-android-project-with-architecture-components-2059eb637912
+
 @RunWith(AndroidJUnit4::class)
 class AddPlantViewModelTest {
 
