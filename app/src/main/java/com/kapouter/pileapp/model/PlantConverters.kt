@@ -24,7 +24,7 @@ class PlantConverters {
     @TypeConverter
     fun binaryToString(binary: Binary?): String? {
         if (binary == null) return null
-        return binary.value
+        return binary.name
     }
 
     @TypeConverter
@@ -36,13 +36,19 @@ class PlantConverters {
     @TypeConverter
     fun levelToString(level: Level?): String? {
         if (level == null) return null
-        return level.level
+        return level.name
+    }
+
+    @TypeConverter
+    fun stringToLevel(json: String?): Level? {
+        if (json == null) return null
+        return Level.valueOf(json)
     }
 
     @TypeConverter
     fun yearPeriodToString(yearPeriod: YearPeriod?): String? {
         if (yearPeriod == null) return null
-        return yearPeriod.period
+        return yearPeriod.name
     }
 
     @TypeConverter
@@ -54,7 +60,7 @@ class PlantConverters {
     @TypeConverter
     fun rateToString(rate: Rate?): String? {
         if (rate == null) return null
-        return rate.rate
+        return rate.name
     }
 
     @TypeConverter
@@ -64,15 +70,9 @@ class PlantConverters {
     }
 
     @TypeConverter
-    fun stringToLevel(json: String?): Level? {
-        if (json == null) return null
-        return Level.valueOf(json)
-    }
-
-    @TypeConverter
     fun lifespanToString(lifespan: Lifespan?): String? {
         if (lifespan == null) return null
-        return lifespan.lifespan
+        return lifespan.name
     }
 
     @TypeConverter
@@ -84,7 +84,7 @@ class PlantConverters {
     @TypeConverter
     fun toxicityToString(toxicity: Toxicity?): String? {
         if (toxicity == null) return null
-        return toxicity.toxicity
+        return toxicity.name
     }
 
     @TypeConverter
@@ -96,7 +96,7 @@ class PlantConverters {
     @TypeConverter
     fun bloomPeriodToString(bloomPeriod: BloomPeriod?): String? {
         if (bloomPeriod == null) return null
-        return bloomPeriod.period
+        return bloomPeriod.name
     }
 
     @TypeConverter
@@ -108,7 +108,7 @@ class PlantConverters {
     @TypeConverter
     fun growthPeriodToString(growthPeriod: GrowthPeriod?): String? {
         if (growthPeriod == null) return null
-        return growthPeriod.period
+        return growthPeriod.name
     }
 
     @TypeConverter
