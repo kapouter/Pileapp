@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kapouter.pileapp.model.GrovePlant
-import com.kapouter.pileapp.testUtils.observeOnce
+import com.kapouter.pileapp.utils.observeOnce
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.hasItems
 import org.junit.After
