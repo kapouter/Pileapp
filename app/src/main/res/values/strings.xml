@@ -2,4 +2,11 @@
     <string name="app_name">Pileapp</string>
 
     <string name="search">Search</string>
+    <string name="lifespan">Lifespan</string>
+    <string name="growth_rate">Growth rate</string>
+    <string name="growth_period">Growth period</string>
+    <string name="toxicity">Toxicity</string>
+    <string name="leaf_retention">Leaf retention</string>
+    <string name="bloom_period">Bloom period</string>
+    <string name="propagation">Propagation</string>
 </resources>
