@@ -76,24 +76,37 @@ enum class Binary(val value: String) {
 }
 
 enum class Level(val level: String) {
+    @SerializedName("None")
     NONE("None"),
+    @SerializedName("Low")
     LOW("Low"),
+    @SerializedName("Medium")
     MEDIUM("Medium"),
+    @SerializedName("High")
     HIGH("High")
 }
 
 enum class YearPeriod(val period: String) {
+    @SerializedName("Spring")
     SPRING("Spring"),
+    @SerializedName("Summer")
     SUMMER("Summer"),
+    @SerializedName("Fall")
     FALL("Fall"),
+    @SerializedName("Winter")
     WINTER("Winter"),
+    @SerializedName("Year-round")
     YEAR_ROUND("Year-round")
 }
 
 enum class Rate(val rate: String) {
+    @SerializedName("None")
     NONE("None"),
+    @SerializedName("Slow")
     SLOW("Slow"),
+    @SerializedName("Moderate")
     MODERATE("Moderate"),
+    @SerializedName("Rapid")
     RAPID("Rapid")
 }
 
@@ -107,35 +120,60 @@ enum class Lifespan(val lifespan: String) {
 }
 
 enum class Toxicity(val toxicity: String) {
+    @SerializedName("None")
     NONE("None"),
+    @SerializedName("Slight")
     SLIGHT("Slight"),
+    @SerializedName("Moderate")
     MODERATE("Moderate"),
+    @SerializedName("Severe")
     SEVERE("Severe")
 }
 
 enum class BloomPeriod(val period: String) {
+    @SerializedName("Spring")
     SPRING("Spring"),
+    @SerializedName("Early Spring")
     EARLY_SPRING("Early Spring"),
+    @SerializedName("Mid Spring")
     MID_SPRING("Mid Spring"),
+    @SerializedName("Late Spring")
     LATE_SPRING("Late Spring"),
+    @SerializedName("Summer")
     SUMMER("Summer"),
+    @SerializedName("Early Summer")
     EARLY_SUMMER("Early Summer"),
+    @SerializedName("Mid Summer")
     MID_SUMMER("Mid Summer"),
+    @SerializedName("Late Summer")
     LATE_SUMMER("Late Summer"),
+    @SerializedName("Fall")
     FALL("Fall"),
+    @SerializedName("Winter")
     WINTER("Winter"),
+    @SerializedName("Late Winter")
     LATE_WINTER("Late Winter"),
+    @SerializedName("Indeterminate")
     INDETERMINATE("Indeterminate")
 }
 
 enum class GrowthPeriod(val period: String) {
+    @SerializedName("Spring")
     SPRING("Spring"),
+    @SerializedName("Spring & Fall")
     SPRING_FALL("Spring & Fall"),
+    @SerializedName("Spring & Summer")
     SPRING_SUMMER("Spring & Summer"),
+    @SerializedName("Spring, Summer & Fall")
     SPRING_SUMMER_FALL("Spring, Summer & Fall"),
+    @SerializedName("Summer")
     SUMMER("Summer"),
+    @SerializedName("Summer & Fall")
     SUMMER_FALL("Summer & Fall"),
+    @SerializedName("Fall")
     FALL("Fall"),
+    @SerializedName("Fall, Winter & Spring")
     FALL_WINTER_SPRING("Fall, Winter & Spring"),
+    @SerializedName("Year-round")
     YEAR_ROUND("Year-round")
 }

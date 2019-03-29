@@ -39,21 +39,21 @@
     <TextView
             android:id="@+id/lifespan"
             android:layout_height="0dp"
+            android:layout_width="wrap_content"
             style="@style/Subtitle"
             android:text="@string/lifespan"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@id/scientificName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/barrier"
-            android:layout_width="wrap_content"/>
+            app:layout_constraintBottom_toTopOf="@id/growthRate"/>
 
     <androidx.constraintlayout.widget.Barrier
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/barrier"
             app:barrierDirection="end"
-            app:constraint_referenced_ids="lifespan"/>
+            app:constraint_referenced_ids="lifespan,growthRate,growthPeriod,bloomPeriod"/>
 
     <ImageView
             android:id="@+id/lifespan1"
@@ -74,9 +74,11 @@
             android:layout_height="24dp"
             android:tint="@color/grey"
             android:src="@drawable/leaf"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/lifespan1"
             app:layout_constraintEnd_toStartOf="@id/lifespan3"
-            app:layout_constraintBottom_toBottomOf="@id/lifespan1"/>
+            app:layout_constraintBottom_toBottomOf="@id/lifespan1"
+            />
 
     <ImageView
             android:id="@+id/lifespan3"
@@ -84,8 +86,144 @@
             android:layout_height="24dp"
             android:tint="@color/grey"
             android:src="@drawable/leaf"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/lifespan2"
             app:layout_constraintBottom_toBottomOf="@id/lifespan2"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/growthRate"
+            android:text="@string/growth_rate"
+            style="@style/Subtitle"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lifespan"/>
+
+    <ImageView
+            android:id="@+id/growthRateImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/snail"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            app:layout_constraintBottom_toBottomOf="@id/growthRate"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/growthPeriod"
+            android:text="@string/growth_period"
+            style="@style/Subtitle"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/growthRate"/>
+
+    <ImageView
+            android:id="@+id/spring"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/flower"
+            android:layout_marginStart="16dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            app:layout_constraintEnd_toStartOf="@id/summer"
+            app:layout_constraintBottom_toBottomOf="@id/growthPeriod"/>
+
+    <ImageView
+            android:id="@+id/summer"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/sun"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/spring"
+            app:layout_constraintEnd_toStartOf="@id/fall"
+            app:layout_constraintBottom_toBottomOf="@id/spring"/>
+
+    <ImageView
+            android:id="@+id/fall"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/leaf"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/summer"
+            app:layout_constraintBottom_toBottomOf="@id/summer"
+            app:layout_constraintEnd_toStartOf="@id/winter"/>
+
+    <ImageView
+            android:id="@+id/winter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/snowflake"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/fall"
+            app:layout_constraintBottom_toBottomOf="@id/fall"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/bloomPeriod"
+            android:text="@string/bloom_period"
+            style="@style/Subtitle"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/growthPeriod"/>
+
+    <ImageView
+            android:id="@+id/springb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/flower"
+            android:layout_marginStart="16dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            app:layout_constraintEnd_toStartOf="@id/summerb"
+            app:layout_constraintBottom_toBottomOf="@id/bloomPeriod"/>
+
+    <ImageView
+            android:id="@+id/summerb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/sun"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/springb"
+            app:layout_constraintEnd_toStartOf="@id/fallb"
+            app:layout_constraintBottom_toBottomOf="@id/springb"/>
+
+    <ImageView
+            android:id="@+id/fallb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/leaf"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/summerb"
+            app:layout_constraintBottom_toBottomOf="@id/summerb"
+            app:layout_constraintEnd_toStartOf="@id/winterb"/>
+
+    <ImageView
+            android:id="@+id/winterb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/snowflake"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/fallb"
+            app:layout_constraintBottom_toBottomOf="@id/fallb"
             app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
