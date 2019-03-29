@@ -2,7 +2,6 @@ package com.kapouter.pileapp
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.kapouter.pileapp.model.*
 import com.kapouter.pileapp.viewmodels.PlantDetailViewModel
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import kotlinx.android.synthetic.main.fragment_plant_detail.view.*
+import kotlin.reflect.full.memberProperties
 
 class PlantDetailFragment : Fragment() {
 
@@ -35,7 +35,6 @@ class PlantDetailFragment : Fragment() {
             .get(PlantDetailViewModel::class.java)
         viewModel.getPlant().observe(this, Observer {
             if (it != null) updateView(it)
-            Log.d("azerty", it.toString())
         })
         viewModel.loadPlant(args.plantId)
 
@@ -51,6 +50,9 @@ class PlantDetailFragment : Fragment() {
         setGrowthRate(plant.mainSpecies?.specifications?.growthRate)
         plant.mainSpecies?.specifications?.growthPeriod?.apply { setGrowthPeriod(this) }
         plant.mainSpecies?.seed?.bloomPeriod?.apply { setBloomPeriod(this) }
+        plant.mainSpecies?.specifications?.toxicity?.apply { setToxicity(this) }
+        plant.mainSpecies?.specifications?.leafRetention?.apply { setLeafRetention(this) }
+        setPropagation(plant.mainSpecies?.propagation)
     }
 
     private fun setLifespan(lifespan: Lifespan) {
@@ -132,6 +134,39 @@ class PlantDetailFragment : Fragment() {
             BloomPeriod.WINTER, BloomPeriod.LATE_WINTER ->
                 winterb.setColorFilter(ContextCompat.getColor(context!!, R.color.blue_light), PorterDuff.Mode.SRC_IN)
             BloomPeriod.INDETERMINATE -> return
+        }
+    }
+
+    private fun setToxicity(toxicity: Toxicity) {
+        when (toxicity) {
+            Toxicity.NONE ->
+                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.grey), PorterDuff.Mode.SRC_IN)
+            Toxicity.SLIGHT ->
+                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.yellow), PorterDuff.Mode.SRC_IN)
+            Toxicity.MODERATE ->
+                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.orange), PorterDuff.Mode.SRC_IN)
+            Toxicity.SEVERE ->
+                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.red), PorterDuff.Mode.SRC_IN)
+        }
+    }
+
+    private fun setLeafRetention(leafRetention: Boolean) {
+        if (leafRetention) leafRetentionImage.setColorFilter(
+            ContextCompat.getColor(context!!, R.color.green),
+            PorterDuff.Mode.SRC_IN
+        )
+    }
+
+    private fun setPropagation(propagation: Propagation?) {
+        if (propagation == null) propagationValue.text = getString(R.string.unknown)
+        else {
+            val propagationText = Propagation::class.memberProperties.filter {
+                it.get(propagation) == true
+            }.joinToString(", ") { it.name }
+            if (propagationText.isNotEmpty())
+                propagationValue.text = getString(R.string.by, propagationText)
+            else
+                propagationValue.text = getString(R.string.unknown)
         }
     }
 }

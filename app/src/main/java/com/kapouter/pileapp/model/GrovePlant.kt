@@ -39,7 +39,7 @@ data class MainSpeciesSpecifications(
     @SerializedName("growth_habit") val growthHabit: String?,
     @SerializedName("growth_form") val growthForm: String?,
     @TypeConverters(PlantConverters::class) @SerializedName("lifespan") val lifespan: Lifespan?,
-    @SerializedName("leaf_retention") val leafRetention: String?,
+    @SerializedName("leaf_retention") val leafRetention: Boolean?,
     @TypeConverters(PlantConverters::class) @SerializedName("bloat") val bloat: Level?
 )
 

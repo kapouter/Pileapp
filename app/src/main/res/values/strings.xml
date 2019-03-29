@@ -9,6 +9,8 @@
     <string name="leaf_retention">Leaf retention</string>
     <string name="bloom_period">Bloom period</string>
     <string name="propagation">Propagation</string>
+    <string name="by">by %s</string>
+    <string name="unknown">Unknown</string>
 
     <string name="add_plant">Add plant</string>
     <string name="plant_image">Plant image</string>
