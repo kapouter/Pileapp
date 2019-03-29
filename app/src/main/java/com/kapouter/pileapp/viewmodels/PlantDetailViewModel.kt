@@ -19,4 +19,9 @@ class PlantDetailViewModel @Inject constructor(private val repository: GroveRepo
     fun loadPlant(plantId: Int) {
         this.plantId.postValue(plantId)
     }
+
+    fun removePlant() {
+        val value = plant.value
+        if (value != null) repository.removePlant(value)
+    }
 }

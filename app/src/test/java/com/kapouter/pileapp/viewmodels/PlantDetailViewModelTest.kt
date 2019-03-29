@@ -8,6 +8,7 @@ import com.kapouter.pileapp.model.GrovePlant
 import com.kapouter.pileapp.utils.observeOnce
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import org.hamcrest.Matchers
 import org.junit.Assert
 import org.junit.Before
@@ -40,6 +41,16 @@ class PlantDetailViewModelTest {
         viewModel.loadPlant(plantId)
         viewModel.getPlant().observeOnce {
             Assert.assertThat(it, Matchers.equalTo(plant1))
+        }
+    }
+
+    @Test
+    fun testRemovePlant() {
+        viewModel.loadPlant(plantId)
+        viewModel.getPlant().observeOnce {
+            Assert.assertThat(it, Matchers.equalTo(plant1))
+            viewModel.removePlant()
+            verify(groveRepository).removePlant(plant1)
         }
     }
 }
