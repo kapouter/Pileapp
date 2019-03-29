@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.kapouter.pileapp.adapters.PlantImageAdapter
 import com.kapouter.pileapp.model.*
@@ -37,6 +38,11 @@ class PlantDetailFragment : Fragment() {
             if (it != null) updateView(it)
         })
         viewModel.loadPlant(args.plantId)
+
+        view.remove.setOnClickListener {
+            viewModel.removePlant()
+            Navigation.findNavController(view).popBackStack()
+        }
 
         return view
     }
