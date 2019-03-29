@@ -71,4 +71,10 @@ class GroveRepository(
             }
         })
     }
+
+    fun removePlant(plant: GrovePlant) {
+        executor.execute {
+            groveDao.delete(plant)
+        }
+    }
 }

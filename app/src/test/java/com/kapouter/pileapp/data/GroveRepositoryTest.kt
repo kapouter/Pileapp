@@ -69,4 +69,10 @@ class GroveRepositoryTest {
         verify(groveDao).insert(plant1)
         verify(plantDao).applyIsInGrove(1)
     }
+
+    @Test
+    fun testRemovePlant() {
+        repository.removePlant(plant1)
+        verify(groveDao).delete(plant1)
+    }
 }
