@@ -74,5 +74,6 @@ class GroveRepositoryTest {
     fun testRemovePlant() {
         repository.removePlant(plant1)
         verify(groveDao).delete(plant1)
+        verify(plantDao).applyIsNotInGrove(plant1.id)
     }
 }

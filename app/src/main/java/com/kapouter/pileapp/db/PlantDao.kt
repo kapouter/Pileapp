@@ -18,4 +18,7 @@ interface PlantDao {
 
     @Query("UPDATE plants SET isGrovePlant = 1 WHERE id LIKE :plantId")
     fun applyIsInGrove(plantId: Int)
+
+    @Query("UPDATE plants SET isGrovePlant = 0 WHERE id LIKE :plantId")
+    fun applyIsNotInGrove(plantId: Int)
 }
