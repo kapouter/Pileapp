@@ -73,4 +73,13 @@ class GroveDaoTest {
         val plant = groveDao.getPlant(1)
         assertThat(plant, equalTo(plant1))
     }
+
+    @Test
+    fun testDeletePlant() {
+        groveDao.insert(plant1)
+        groveDao.delete(plant1)
+        val plant = groveDao.getPlant(1)
+        val expectedValue : GrovePlant? = null
+        assertThat(plant, equalTo(expectedValue))
+    }
 }

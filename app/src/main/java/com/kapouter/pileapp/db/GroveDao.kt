@@ -10,11 +10,14 @@ interface GroveDao {
     fun getPlants(): DataSource.Factory<Int, GrovePlant>
 
     @Query("SELECT * FROM grovePlants WHERE id = :plantId")
-    fun getPlant(plantId: Int): GrovePlant
+    fun getPlant(plantId: Int): GrovePlant?
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(plant: GrovePlant)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(plant: GrovePlant)
+
+    @Delete
+    fun delete(plant: GrovePlant)
 }
