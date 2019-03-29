@@ -9,4 +9,11 @@
     <string name="leaf_retention">Leaf retention</string>
     <string name="bloom_period">Bloom period</string>
     <string name="propagation">Propagation</string>
+
+    <string name="add_plant">Add plant</string>
+    <string name="plant_image">Plant image</string>
+    <string name="spring">Spring</string>
+    <string name="summer">Summer</string>
+    <string name="fall">Fall</string>
+    <string name="winter">Winter</string>
 </resources>

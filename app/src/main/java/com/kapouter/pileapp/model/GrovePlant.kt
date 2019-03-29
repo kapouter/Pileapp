@@ -68,112 +68,112 @@ data class SoilsAdaptation(
     @SerializedName("coarse") val coarse: Boolean?
 )
 
-enum class Binary(val value: String) {
+enum class Binary {
     @SerializedName("Yes")
-    YES("Yes"),
+    YES,
     @SerializedName("No")
-    NO("No")
+    NO
 }
 
-enum class Level(val level: String) {
+enum class Level {
     @SerializedName("None")
-    NONE("None"),
+    NONE,
     @SerializedName("Low")
-    LOW("Low"),
+    LOW,
     @SerializedName("Medium")
-    MEDIUM("Medium"),
+    MEDIUM,
     @SerializedName("High")
-    HIGH("High")
+    HIGH
 }
 
-enum class YearPeriod(val period: String) {
+enum class YearPeriod {
     @SerializedName("Spring")
-    SPRING("Spring"),
+    SPRING,
     @SerializedName("Summer")
-    SUMMER("Summer"),
+    SUMMER,
     @SerializedName("Fall")
-    FALL("Fall"),
+    FALL,
     @SerializedName("Winter")
-    WINTER("Winter"),
+    WINTER,
     @SerializedName("Year-round")
-    YEAR_ROUND("Year-round")
+    YEAR_ROUND
 }
 
-enum class Rate(val rate: String) {
+enum class Rate {
     @SerializedName("None")
-    NONE("None"),
+    NONE,
     @SerializedName("Slow")
-    SLOW("Slow"),
+    SLOW,
     @SerializedName("Moderate")
-    MODERATE("Moderate"),
+    MODERATE,
     @SerializedName("Rapid")
-    RAPID("Rapid")
+    RAPID
 }
 
-enum class Lifespan(val lifespan: String) {
+enum class Lifespan {
     @SerializedName("Short")
-    SHORT("Short"),
+    SHORT,
     @SerializedName("Moderate")
-    MODERATE("Moderate"),
+    MODERATE,
     @SerializedName("Long")
-    LONG("Long")
+    LONG
 }
 
-enum class Toxicity(val toxicity: String) {
+enum class Toxicity {
     @SerializedName("None")
-    NONE("None"),
+    NONE,
     @SerializedName("Slight")
-    SLIGHT("Slight"),
+    SLIGHT,
     @SerializedName("Moderate")
-    MODERATE("Moderate"),
+    MODERATE,
     @SerializedName("Severe")
-    SEVERE("Severe")
+    SEVERE
 }
 
-enum class BloomPeriod(val period: String) {
+enum class BloomPeriod {
     @SerializedName("Spring")
-    SPRING("Spring"),
+    SPRING,
     @SerializedName("Early Spring")
-    EARLY_SPRING("Early Spring"),
+    EARLY_SPRING,
     @SerializedName("Mid Spring")
-    MID_SPRING("Mid Spring"),
+    MID_SPRING,
     @SerializedName("Late Spring")
-    LATE_SPRING("Late Spring"),
+    LATE_SPRING,
     @SerializedName("Summer")
-    SUMMER("Summer"),
+    SUMMER,
     @SerializedName("Early Summer")
-    EARLY_SUMMER("Early Summer"),
+    EARLY_SUMMER,
     @SerializedName("Mid Summer")
-    MID_SUMMER("Mid Summer"),
+    MID_SUMMER,
     @SerializedName("Late Summer")
-    LATE_SUMMER("Late Summer"),
+    LATE_SUMMER,
     @SerializedName("Fall")
-    FALL("Fall"),
+    FALL,
     @SerializedName("Winter")
-    WINTER("Winter"),
+    WINTER,
     @SerializedName("Late Winter")
-    LATE_WINTER("Late Winter"),
+    LATE_WINTER,
     @SerializedName("Indeterminate")
-    INDETERMINATE("Indeterminate")
+    INDETERMINATE
 }
 
-enum class GrowthPeriod(val period: String) {
+enum class GrowthPeriod {
     @SerializedName("Spring")
-    SPRING("Spring"),
+    SPRING,
     @SerializedName("Spring & Fall")
-    SPRING_FALL("Spring & Fall"),
+    SPRING_FALL,
     @SerializedName("Spring & Summer")
-    SPRING_SUMMER("Spring & Summer"),
+    SPRING_SUMMER,
     @SerializedName("Spring, Summer & Fall")
-    SPRING_SUMMER_FALL("Spring, Summer & Fall"),
+    SPRING_SUMMER_FALL,
     @SerializedName("Summer")
-    SUMMER("Summer"),
+    SUMMER,
     @SerializedName("Summer & Fall")
-    SUMMER_FALL("Summer & Fall"),
+    SUMMER_FALL,
     @SerializedName("Fall")
-    FALL("Fall"),
+    FALL,
     @SerializedName("Fall, Winter & Spring")
-    FALL_WINTER_SPRING("Fall, Winter & Spring"),
+    FALL_WINTER_SPRING,
     @SerializedName("Year-round")
-    YEAR_ROUND("Year-round")
+    YEAR_ROUND
 }

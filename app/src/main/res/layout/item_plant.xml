@@ -30,6 +30,7 @@
             android:id="@+id/addPlant"
             android:src="@drawable/ic_add"
             android:tint="@color/colorPrimaryDark"
+            android:contentDescription="@string/add_plant"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,7 @@ import com.kapouter.pileapp.data.GroveRepository
 import com.kapouter.pileapp.model.GrovePlant
 import javax.inject.Inject
 
-class GroveViewModel @Inject constructor(private val repository: GroveRepository) : ViewModel() {
+class GroveViewModel @Inject constructor(repository: GroveRepository) : ViewModel() {
 
     private val plants: LiveData<PagedList<GrovePlant>> = repository.getPlants()
 
