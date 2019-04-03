@@ -27,6 +27,9 @@ android {
             buildConfigField "String", "TREFLE_TOKEN", '"V2VVMCtJQkREQmdCOUJwNjBxOCtaUT09"'
         }
     }
+    dataBinding {
+        enabled = true
+    }
     useLibrary 'android.test.runner'
     testOptions {
         unitTests {
