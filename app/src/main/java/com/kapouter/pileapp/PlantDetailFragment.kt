@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.kapouter.pileapp.adapters.PlantImageAdapter
+import com.kapouter.pileapp.databinding.FragmentPlantDetailBinding
 import com.kapouter.pileapp.model.*
 import com.kapouter.pileapp.viewmodels.PlantDetailViewModel
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
@@ -26,7 +28,9 @@ class PlantDetailFragment : Fragment() {
     private lateinit var imageAdapter: PlantImageAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_plant_detail, container, false)
+        val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(inflater, R.layout.fragment_plant_detail, container, false)
+        binding.lifecycleOwner = this
+        val view = binding.root
 
         imageAdapter = PlantImageAdapter(context!!)
         view.imagePager.adapter = imageAdapter
@@ -34,6 +38,9 @@ class PlantDetailFragment : Fragment() {
         val viewModelFactory = (activity as BaseActivity).viewModelFactory
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(PlantDetailViewModel::class.java)
+
+        binding.viewModel = viewModel
+
         viewModel.getPlant().observe(this, Observer {
             if (it != null) updateView(it)
         })
@@ -49,16 +56,10 @@ class PlantDetailFragment : Fragment() {
 
     private fun updateView(plant: GrovePlant) {
         imageAdapter.images = plant.images ?: listOf()
-        name.text = plant.name ?: plant.scientificName
-        scientificName.text = plant.scientificName
 
         plant.mainSpecies?.specifications?.lifespan?.apply { setLifespan(this) }
-        setGrowthRate(plant.mainSpecies?.specifications?.growthRate)
         plant.mainSpecies?.specifications?.growthPeriod?.apply { setGrowthPeriod(this) }
         plant.mainSpecies?.seed?.bloomPeriod?.apply { setBloomPeriod(this) }
-        plant.mainSpecies?.specifications?.toxicity?.apply { setToxicity(this) }
-        plant.mainSpecies?.specifications?.leafRetention?.apply { setLeafRetention(this) }
-        setPropagation(plant.mainSpecies?.propagation)
     }
 
     private fun setLifespan(lifespan: Lifespan) {
@@ -74,19 +75,6 @@ class PlantDetailFragment : Fragment() {
                 lifespan2.setColorFilter(ContextCompat.getColor(context!!, R.color.green), PorterDuff.Mode.SRC_IN)
                 lifespan3.setColorFilter(ContextCompat.getColor(context!!, R.color.green), PorterDuff.Mode.SRC_IN)
             }
-        }
-    }
-
-    private fun setGrowthRate(growthRate: Rate?) {
-        if (growthRate == null)
-            growthRateImage.setColorFilter(ContextCompat.getColor(context!!, R.color.grey), PorterDuff.Mode.SRC_IN)
-
-        when (growthRate) {
-            Rate.NONE ->
-                growthRateImage.setColorFilter(ContextCompat.getColor(context!!, R.color.grey), PorterDuff.Mode.SRC_IN)
-            Rate.SLOW -> growthRateImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.snail))
-            Rate.MODERATE -> growthRateImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.horse))
-            Rate.RAPID -> growthRateImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.cheetah))
         }
     }
 
@@ -140,39 +128,6 @@ class PlantDetailFragment : Fragment() {
             BloomPeriod.WINTER, BloomPeriod.LATE_WINTER ->
                 winterb.setColorFilter(ContextCompat.getColor(context!!, R.color.blue_light), PorterDuff.Mode.SRC_IN)
             BloomPeriod.INDETERMINATE -> return
-        }
-    }
-
-    private fun setToxicity(toxicity: Toxicity) {
-        when (toxicity) {
-            Toxicity.NONE ->
-                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.grey), PorterDuff.Mode.SRC_IN)
-            Toxicity.SLIGHT ->
-                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.yellow), PorterDuff.Mode.SRC_IN)
-            Toxicity.MODERATE ->
-                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.orange), PorterDuff.Mode.SRC_IN)
-            Toxicity.SEVERE ->
-                toxicityImage.setColorFilter(ContextCompat.getColor(context!!, R.color.red), PorterDuff.Mode.SRC_IN)
-        }
-    }
-
-    private fun setLeafRetention(leafRetention: Boolean) {
-        if (leafRetention) leafRetentionImage.setColorFilter(
-            ContextCompat.getColor(context!!, R.color.green),
-            PorterDuff.Mode.SRC_IN
-        )
-    }
-
-    private fun setPropagation(propagation: Propagation?) {
-        if (propagation == null) propagationValue.text = getString(R.string.unknown)
-        else {
-            val propagationText = Propagation::class.memberProperties.filter {
-                it.get(propagation) == true
-            }.joinToString(", ") { it.name }
-            if (propagationText.isNotEmpty())
-                propagationValue.text = getString(R.string.by, propagationText)
-            else
-                propagationValue.text = getString(R.string.unknown)
         }
     }
 }
