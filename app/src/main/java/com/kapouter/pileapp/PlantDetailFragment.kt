@@ -14,44 +14,47 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.kapouter.pileapp.adapters.PlantImageAdapter
 import com.kapouter.pileapp.databinding.FragmentPlantDetailBinding
-import com.kapouter.pileapp.model.*
+import com.kapouter.pileapp.model.BloomPeriod
+import com.kapouter.pileapp.model.GrovePlant
+import com.kapouter.pileapp.model.GrowthPeriod
+import com.kapouter.pileapp.model.Lifespan
 import com.kapouter.pileapp.viewmodels.PlantDetailViewModel
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
-import kotlinx.android.synthetic.main.fragment_plant_detail.view.*
-import kotlin.reflect.full.memberProperties
 
 class PlantDetailFragment : Fragment() {
 
-    private lateinit var viewModel: PlantDetailViewModel
+    private lateinit var plantDetailViewModel: PlantDetailViewModel
     private val args: PlantDetailFragmentArgs by navArgs()
 
     private lateinit var imageAdapter: PlantImageAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(inflater, R.layout.fragment_plant_detail, container, false)
-        binding.lifecycleOwner = this
-        val view = binding.root
-
-        imageAdapter = PlantImageAdapter(context!!)
-        view.imagePager.adapter = imageAdapter
-
         val viewModelFactory = (activity as BaseActivity).viewModelFactory
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
+        plantDetailViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(PlantDetailViewModel::class.java)
 
-        binding.viewModel = viewModel
+        imageAdapter = PlantImageAdapter(context!!)
 
-        viewModel.getPlant().observe(this, Observer {
-            if (it != null) updateView(it)
-        })
-        viewModel.loadPlant(args.plantId)
+        val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
+            inflater, R.layout.fragment_plant_detail, container, false
+        )
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = plantDetailViewModel
 
-        view.remove.setOnClickListener {
-            viewModel.removePlant()
-            Navigation.findNavController(view).popBackStack()
+            imagePager.adapter = imageAdapter
+            remove.setOnClickListener {
+                plantDetailViewModel.removePlant()
+                Navigation.findNavController(root).popBackStack()
+            }
         }
 
-        return view
+        plantDetailViewModel.getPlant().observe(this, Observer {
+            if (it != null) updateView(it)
+        })
+        plantDetailViewModel.loadPlant(args.plantId)
+
+        return binding.root
     }
 
     private fun updateView(plant: GrovePlant) {
