@@ -39,6 +39,7 @@ class PlantAdapter(private val onAddListener: OnAddItemListener) :
                     if (plant?.isGrovePlant == 1) null
                     else View.OnClickListener { onAddListener.onAddItem(item) }
                 )
+                executePendingBindings()
             }
         }
     }
