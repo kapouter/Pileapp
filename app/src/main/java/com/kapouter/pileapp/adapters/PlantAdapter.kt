@@ -3,14 +3,13 @@ package com.kapouter.pileapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.widget.ImageViewCompat
+import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kapouter.pileapp.R
+import com.kapouter.pileapp.databinding.ItemPlantBinding
 import com.kapouter.pileapp.model.Plant
-import kotlinx.android.synthetic.main.item_plant.view.*
 
 interface OnAddItemListener {
     fun onAddItem(item: Plant?)
@@ -20,32 +19,26 @@ class PlantAdapter(private val onAddListener: OnAddItemListener) :
     PagedListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_plant, parent, false))
+        ViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_plant, parent, false
+            )
+        )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item, onAddListener)
     }
 
-    class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
+    class ViewHolder(private val binding: ItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Plant?, onAddListener: OnAddItemListener) {
-            v.apply {
-                name.text = item?.name ?: item?.scientificName
-                scientificName.text = item?.scientificName
-                if (item?.isGrovePlant == 0) {
-                    addPlant.setImageResource(R.drawable.ic_add)
-                    ImageViewCompat.setImageTintList(
-                        addPlant,
-                        AppCompatResources.getColorStateList(v.context, R.color.black)
-                    )
-                    addPlant.setOnClickListener { onAddListener.onAddItem(item) }
-                } else {
-                    addPlant.setImageResource(R.drawable.ic_check)
-                    ImageViewCompat.setImageTintList(
-                        addPlant,
-                        AppCompatResources.getColorStateList(v.context, R.color.green)
-                    )
-                }
+            with(binding) {
+                plant = item
+                addPlant.setOnClickListener(
+                    if (plant?.isGrovePlant == 1) null
+                    else View.OnClickListener { onAddListener.onAddItem(item) }
+                )
             }
         }
     }

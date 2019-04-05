@@ -1,41 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:padding="15dp"
-        android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"
-            style="@style/Title"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/addPlant"/>
+    <data>
 
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/scientificName"
-            style="@style/Subtitle"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintEnd_toStartOf="@id/addPlant"
-            app:layout_constraintStart_toStartOf="@id/name"
-            app:layout_constraintTop_toBottomOf="@id/name"/>
+        <variable
+                name="plant"
+                type="com.kapouter.pileapp.model.Plant"/>
+    </data>
 
-    <ImageView
-            android:id="@+id/addPlant"
-            android:src="@drawable/ic_add"
-            android:tint="@color/colorPrimaryDark"
-            android:contentDescription="@string/add_plant"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                style="@style/Title"
+                android:layout_marginEnd="15dp"
+                android:text="@{plant.name ?? plant.scientificName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/addPlant"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/scientificName"
+                style="@style/Subtitle"
+                android:layout_marginEnd="15dp"
+                android:text="@{plant.scientificName}"
+                app:layout_constraintEnd_toStartOf="@id/addPlant"
+                app:layout_constraintStart_toStartOf="@id/name"
+                app:layout_constraintTop_toBottomOf="@id/name"/>
+
+        <ImageView
+                android:id="@+id/addPlant"
+                android:src="@drawable/ic_add"
+                android:tint="@color/colorPrimaryDark"
+                app:addOrCheck="@{plant.isGrovePlant}"
+                android:contentDescription="@string/add_plant"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
